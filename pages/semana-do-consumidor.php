@@ -4,6 +4,7 @@
 */
 
 get_header();
+?>
 
 <a href="https://wa.me/5545999400770?text=<?php echo urlencode('Olá, gostaria de mais informações sobre a Semana do Consumidor 2026'); ?>"
     class="fixed right-3.5 bottom-8 size-20 z-50"
