@@ -298,7 +298,7 @@ get_header();
                                                 <option value="" disabled>Idade</option>
                                                 <option value="0">Menos de 1 ano</option>
                                                 <option value="1">1 ano</option>
-                                                <template x-for="a in 16" :key="a">
+                                                <template x-for="a in 11" :key="a">
                                                     <option :value="a + 1" x-text="(a + 1) + ' anos'"></option>
                                                 </template>
                                             </select>
@@ -636,12 +636,12 @@ function bookingApp() {
             });
         },
 
-        formatDate(date) {
+        formatDate(date, toTrack = false) {
             if (!date) return '';
             const d = String(date.getDate()).padStart(2, '0');
             const m = String(date.getMonth() + 1).padStart(2, '0');
             const y = date.getFullYear();
-            return `${d}${m}${y}`;
+            return !toTrack ? `${d}${m}${y}` : `${y}${m}${d}`;
         },
 
         search() {
@@ -653,6 +653,22 @@ function bookingApp() {
             const adultsStr = this.rooms.map(r => r.adults).join(',');
             const childrenStr = this.rooms.map(r => r.children).join(',');
             const childrenAgesStr = this.rooms.map(r => r.childrenAges.join(',')).join(';');
+
+            const paramsToTrack = {
+                check_in: this.formatDate(this.checkIn, true),
+                check_out: this.formatDate(this.checkOut, true),
+                rooms: this.rooms.length,
+                num_adults: this.rooms.reduce((sum, r) => sum + r.adults, 0),
+                num_children: this.rooms.reduce((sum, r) => sum + r.children, 0),
+                content_type: 'hotel',
+                destination: 'Foz do Iguaçu, Paraná', // Fixo conforme solicitado
+                region: 'Foz do Iguaçu, PR',        // Fixo conforme solicitado
+                city: 'Foz do Iguaçu',
+                country: 'Brazil'
+            }
+            INKTRACK.track('BuscaData', paramsToTrack);
+            INKTRACK.track('Search', paramsToTrack);
+            INKTRACK.track('ViewContent', paramsToTrack);
 
             const params = new URLSearchParams({
                 checkIn: checkInStr,
