@@ -1,0 +1,40 @@
+on:
+    push:
+        branches:
+            - main
+name: 🚀 Deploy website on push
+jobs:
+    web-deploy:
+        name: 🎉 Deploy
+        runs-on: ubuntu-latest
+        steps:
+            - name: 🚚 Get latest code
+              uses: actions/checkout@v3
+
+            - name: 🔄 Install deploy tools
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y sshpass rsync
+                  command -v sshpass
+                  command -v rsync
+
+            - name: 🔑 Add SSH key to known_hosts
+              run: |
+                  mkdir -p ~/.ssh
+                  ssh-keyscan ${{ secrets.SSH_IP }} >> ~/.ssh/known_hosts
+
+            - name: 📦 Install rsync on remote server (if needed)
+              run: |
+                  sshpass -p '${{ secrets.SSH_PASSWORD }}' ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} << 'EOF'
+                    if ! command -v rsync &> /dev/null; then
+                      echo "rsync não encontrado. Instalando..."
+                      sudo apt-get update
+                      sudo apt-get install -y rsync
+                      echo "rsync instalado com sucesso!"
+                    else
+                      echo "rsync já está instalado."
+                    fi
+                  EOF
+
+            - name: 📂 Sync files with rsync
+              run: sshpass -p '${{ secrets.SSH_PASSWORD }}' rsync -avz --delete ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }}:/mnt/volume-ash-manager01/volumes/site_fozplaza_sc26/data/wp-content/themes/fozplaza-sc26/

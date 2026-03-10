@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@theme {
+	/* Cores atualizadas */
+	--color-foz-black: #090909;
+	--color-foz-white: #ffffff;
+	--color-foz-yellow: #ffd100;
+	--color-foz-yellow-light: #fff2b8;
+	--color-foz-green: #00896b;
+	--color-foz-green-dark: #006b54;
+	--color-foz-green-light: #e6f9f3;
+	--color-foz-orange: #ea610a;
+	--color-foz-dark-red: #993b08;
+	--color-foz-brown: #591f06;
+
+	/* Fontes */
+	--font-sans: "Inter", sans-serif;
+}
+
+@layer base {
+	body {
+		background: linear-gradient(180deg, #080b12 0%, #05070d 100%);
+		color: var(--color-foz-white);
+		font-family: var(--font-sans);
+	}
+
+	button {
+		cursor: pointer;
+	}
+
+	/* Custom scrollbar */
+	::-webkit-scrollbar {
+		width: 10px;
+	}
+
+	::-webkit-scrollbar-track {
+		/* background: #0f1420; */
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: #9e6431;
+		border-radius: 5px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: #9e6431;
+	}
+}
+
+@layer utilities {
+	.gradient-orange {
+		background: linear-gradient(
+			135deg,
+			rgba(241, 149, 76, 0.3),
+			rgba(241, 149, 76, 0.05)
+		);
+	}
+	.gradient-yellow {
+		background: linear-gradient(
+			135deg,
+			var(--color-foz-yellow) 0%,
+			var(--color-foz-yellow-light) 100%
+		);
+	}
+	.gradient-green {
+		background: linear-gradient(
+			135deg,
+			var(--color-foz-green) 0%,
+			#00b88a 100%
+		);
+	}
+	.text-gradient {
+		background: linear-gradient(
+			135deg,
+			var(--color-foz-white) 0%,
+			rgba(245, 247, 251, 0.65) 100%
+		);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+	.heading-display {
+		font-family: var(--font-sans);
+		font-weight: 700;
+		letter-spacing: -0.015em;
+		text-transform: uppercase;
+	}
+	.shadow-elevated {
+		box-shadow: 0 40px 80px rgba(4, 7, 12, 0.45);
+	}
+	.animate-pulse-glow {
+		animation: pulse-glow 2s infinite;
+	}
+	.animate-float {
+		animation: float 3s ease-in-out infinite;
+	}
+	.animate-badge-blink {
+		animation: badge-blink 1.5s infinite;
+	}
+}
+
+@keyframes pulse-glow {
+	0%,
+	100% {
+		box-shadow: 0 0 20px rgba(248, 211, 116, 0.25);
+	}
+	50% {
+		box-shadow: 0 0 40px rgba(243, 195, 84, 0.35);
+	}
+}
+
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+}
+
+@keyframes badge-blink {
+	0%,
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 0.85;
+		transform: scale(1.01);
+	}
+}

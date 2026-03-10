@@ -1,0 +1,4 @@
+- npm run dev          # watch Tailwind + BrowserSync hot reload
+- npm run build:css    # build Tailwind CSS once
+- npm run watch:css    # watch Tailwind CSS only
+- npm run serve        # BrowserSync dev server using existing CSS

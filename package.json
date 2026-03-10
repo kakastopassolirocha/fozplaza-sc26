@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "build:css": "npx @tailwindcss/cli -i ./tailwind/input.css -o ./tailwind/output.css",
+    "watch:css": "npx @tailwindcss/cli -i ./tailwind/input.css -o ./tailwind/output.css --watch",
+    "serve": "browser-sync start --config bs-config.js",
+    "dev": "concurrently \"npm:watch:css\" \"npm:serve\""
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.17",
+    "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.2",
+    "concurrently": "^9.0.1"
+  }
+}
