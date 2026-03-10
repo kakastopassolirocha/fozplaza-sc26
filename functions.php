@@ -73,4 +73,12 @@ require_once(get_template_directory().'/plugins/instagram/init.php');
 add_action( 'wp_enqueue_scripts', function(){
     // Registrando scripts e estilos
     wp_enqueue_style( 'tailwindcss', THEME_URI . 'tailwind/output.css', array(), time(), 'all' );
+
+    wp_enqueue_script('bodymovin', THEME_DIST . 'js/libs/lottie_light.5.12.2.min.js', [], '5.12.2');
+
+    wp_enqueue_script('geral', THEME_DIST . 'js/geral.js', ['bodymovin'], time(), true);
+    wp_localize_script('geral', 'backvars', [
+        'dist' => THEME_DIST
+    ]);
 });
+

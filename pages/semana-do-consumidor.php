@@ -4,7 +4,11 @@
 */
 
 get_header();
-?>
+
+<a href="https://wa.me/5545999400770?text=<?php echo urlencode('Olá, gostaria de mais informações sobre a Semana do Consumidor 2026'); ?>"
+    class="fixed right-3.5 bottom-8 size-20 z-50"
+    target="_blank" id="whatsapp-fixed" data-inktrack-event="Contact">
+</a>
 
 <!-- Flatpickr (date picker) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
